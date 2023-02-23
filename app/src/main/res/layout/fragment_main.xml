@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/MainR"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:id="@+id/Note_exit"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/_235sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:text="Notes"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+
+    <ImageView
+        android:id="@+id/logout"
+        android:visibility="visible"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_height="@dimen/_30sdp"
+        app:srcCompat="@drawable/ic_logout" />
+
+</LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/note_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Note_exit"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_7sdp"
+        tools:listitem="@layout/note_item" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_bar"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="@dimen/_30sdp"
+        app:lottie_colorFilter="@color/black"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/load" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_140sdp"
+        android:contentDescription="@string/todo"
+        app:backgroundTint="@color/light_gray"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add" />
+
+
+
+
+</RelativeLayout>

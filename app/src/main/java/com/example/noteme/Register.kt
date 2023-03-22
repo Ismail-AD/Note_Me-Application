@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.noteme.Models.UserReq
 import com.example.noteme.Utils.NetworkResult
@@ -17,6 +20,7 @@ import com.example.noteme.databinding.FragmentRegisterBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -88,24 +92,27 @@ class Register : Fragment() {
     }
 
     private fun bind_Observer_to_fragment() {
-        viewModelClass.liveData.observe(viewLifecycleOwner, Observer {
-            //Observer will return the user response result
-            binding.loadingBar.isVisible = false
-            when (it) {
-                is NetworkResult.Success -> {
-                    tokenManagement.saveToken(it.data!!.token)
-                   //to get token from response
-                    findNavController().navigate(R.id.action_register_to_login)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModelClass.stateflow.collect {
+                    binding.loadingBar.isVisible = false
+                    when (it) {
+                        is NetworkResult.Success -> {
+                            tokenManagement.saveToken(it.data!!.token)
+                            //to get token from response
+                            findNavController().navigate(R.id.action_register_to_login)
+                        }
+                        is NetworkResult.Failure -> {
+                            binding.txtError.text = it.message
+                        }
+                        is NetworkResult.Loading -> {
+                            binding.loadingBar.isVisible = true
+                        }
+                        else -> {}
+                    }
                 }
-                is NetworkResult.Failure -> {
-                    binding.txtError.text = it.message
-                }
-                is NetworkResult.Loading -> {
-                    binding.loadingBar.isVisible = true
-                }
-                else -> {}
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

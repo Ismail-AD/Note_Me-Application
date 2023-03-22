@@ -13,8 +13,8 @@ import javax.inject.Inject
 class notesViewModel @Inject constructor(private val notesRepository: NotesRepository) :
     ViewModel() {
 
-    val mutableInstance get() = notesRepository.responseLiveData
-    val statusInstance get() = notesRepository.responseStatusLiveData
+    val mutableInstance get() = notesRepository.responseStateFlow
+    val statusInstance get() = notesRepository.responseStatusStateFLow
 
 
     var data = notesRepository.getNotesOff()

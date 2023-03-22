@@ -10,14 +10,15 @@ import com.example.noteme.Models.UserResponse
 import com.example.noteme.Utils.NetworkResult
 import com.example.noteme.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelClass @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
-    val liveData: LiveData<NetworkResult<UserResponse>>
-        get() = userRepository.liveDataInstance
+    val stateflow: StateFlow<NetworkResult<UserResponse>>
+        get() = userRepository.stateflowInstance
 
     fun registerUser(userReq: UserReq) {
         //As long as ViewModel Class is active Scope will maintain all background work / functions

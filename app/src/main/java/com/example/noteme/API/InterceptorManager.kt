@@ -18,7 +18,7 @@ class InterceptorManager @Inject constructor() : Interceptor {
         request.addHeader("Authorization",
             "Bearer $token") //As we know api standard to add header using Bearer
 
-        return chain.proceed(request.build()) //proceed request is edited now move forward
+        return chain.proceed(request.build()) //proceed, request is edited now move forward
     }
 
 

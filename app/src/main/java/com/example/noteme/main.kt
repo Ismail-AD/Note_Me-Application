@@ -1,5 +1,6 @@
 package com.example.noteme
 
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,7 +11,10 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -24,8 +28,6 @@ import com.example.noteme.Utils.roomDatabase
 import com.example.noteme.databinding.FragmentMainBinding
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -60,27 +62,32 @@ class main : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding.noteList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        _binding.noteList.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         _binding.noteList.adapter = listAdapterNotes
 
         if (!internetIsConnected() && tokenManagement.getToken() != null) {
             notesViewModel.data.observe(viewLifecycleOwner) {
-                val notes=it.sortedByDescending { it.updatedAt }
+                val notes = it.sortedByDescending { it.updatedAt }
                 listAdapterNotes.submitList(notes)
                 Toast.makeText(context, "VIEW ONLY MODE ACTIVATED !", Toast.LENGTH_SHORT).show()
                 _binding.addNote.isVisible = false
             }
-        } else {
+        }
+
+        else {
             _binding.addNote.isVisible = true
             bindObservers()
             notesViewModel.getNotes()
         }
+
         _binding.logout.setOnClickListener {
             notesViewModel.delete_All_Data()
             tokenManagement.removeToken()
             Toast.makeText(context, "LOGOUT SUCCESSFULLY !", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
         }
+
         _binding.addNote.setOnClickListener {
             findNavController().navigate(R.id.action_main_to_note)
         }
@@ -96,23 +103,34 @@ class main : Fragment() {
         }
     }
 
-
     private fun bindObservers() {
-        notesViewModel.mutableInstance.observe(viewLifecycleOwner, Observer {
-            _binding.loadingBar.isVisible = false
-            when (it) {
-                is NetworkResult.Success -> {
-                    val notes=it.data!!.sortedByDescending { it.updatedAt }
-                    listAdapterNotes.submitList(notes)
-                }
-                is NetworkResult.Failure -> {
-                    Toast.makeText(context, it.message.toString(), Toast.LENGTH_SHORT).show()
-                }
-                is NetworkResult.Loading -> {
-                    _binding.loadingBar.isVisible = true
+        //we need to launch coroutine in order to call collect(suspendedFunc)
+        viewLifecycleOwner.lifecycleScope.launch {
+
+            //repeatOnLifecycle is a suspend function that takes a Lifecycle.State as a parameter and is used to automatically create
+            //and launch a new coroutine with the block passed to it when the lifecycle reaches that mentioned state, and cancel
+            //the ongoing coroutine that’s executing the block when the lifecycle falls below the state.
+
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                notesViewModel.mutableInstance.collect {
+                    _binding.loadingBar.isVisible = false
+                    when (it) {
+                        is NetworkResult.Success -> {
+                            val notes = it.data!!.sortedByDescending { it.updatedAt }
+                            listAdapterNotes.submitList(notes)
+                        }
+                        is NetworkResult.Failure -> {
+                            Toast.makeText(context, it.message.toString(), Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is NetworkResult.Loading -> {
+                            _binding.loadingBar.isVisible = true
+                        }
+                        is NetworkResult.StateflowInitialization -> {}
+                    }
                 }
             }
-        })
+        }
     }
 
     private fun onNoteClicked(notesResponse: NotesResponse) {
@@ -122,5 +140,4 @@ class main : Fragment() {
             Gson().toJson(notesResponse)) //as we need string so we will serialize java to json string
         findNavController().navigate(R.id.action_main_to_note, bundles)
     }
-
 }

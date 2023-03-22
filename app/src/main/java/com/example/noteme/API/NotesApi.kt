@@ -20,7 +20,7 @@ interface NotesApi {
     @PUT("/notes/{noteId}") //noteId for each user would be dynamically generated at signup phase
     //we have to use it to update notes of respective user
     //thus we tell retrofit how to get this noteId using 'path'
-    suspend fun updateNotes(@Path("noteId") noteId: String, @Body noteRequest: NoteRequest, ): Response<NotesResponse>
+    suspend fun updateNotes(@Path("noteId") noteId: String, @Body noteRequest: NoteRequest ): Response<NotesResponse>
 
 
     @DELETE("/notes/{noteId}")

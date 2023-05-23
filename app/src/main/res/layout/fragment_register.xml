@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-
+   android:background="@color/black"
     android:layout_height="match_parent"
     android:scrollbars="none">
 
@@ -11,34 +11,26 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="70dp"
         android:orientation="vertical"
-        android:paddingTop="36dp"
+        android:paddingTop="25dp"
         android:paddingBottom="60dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/sf_pro_display_bold"
             android:text="@string/txt_register_header"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/sf_pro_display_regular"
-            android:text="@string/txt_register_subheader"
-            android:textColor="@color/light_gray"
-            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="62dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_username"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <EditText
@@ -49,15 +41,17 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/sf_display_semibold"
             android:hint="@string/txt_username_hint"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
+            android:importantForAutofill="no"
+            android:singleLine="true"
+            android:textColor="#E0E0E0"
+            android:textColorHint="#808080"
             android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +59,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_email"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <EditText
@@ -77,16 +71,16 @@
             android:fontFamily="@font/sf_display_semibold"
             android:hint="@string/txt_email_hint"
             android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
+            android:textColor="#E0E0E0"
+            android:textColorHint="#808080"
             android:textSize="16sp"
-            android:autofillHints="" />
+            android:importantForAutofill="no" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,7 +88,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_password"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <EditText
@@ -104,10 +98,11 @@
             android:layout_marginTop="7dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/sf_display_semibold"
+            android:importantForAutofill="no"
             android:hint="@string/txt_password_hint"
             android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
+            android:textColor="#E0E0E0"
+            android:textColorHint="#808080"
             android:textSize="16sp"
             android:autofillHints="" />
 
@@ -115,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="#FFFFFF" />
 
         <TextView
             android:id="@+id/txt_error"
@@ -124,7 +119,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text=""
-            android:textColor="@color/highlight_text_color"
+            android:textColor="#808080"
             android:textSize="12sp" />
 
         <Button
@@ -133,11 +128,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/black"
             android:fontFamily="@font/sf_pro_display_bold"
             android:text="@string/txt_sign_up"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:backgroundTint="#212121"
             android:textSize="16sp" />
 
         <TextView
@@ -145,11 +140,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textColor="@color/white"
             android:clickable="true"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_display_semibold"
             android:text="@string/txt_already_have_account"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:focusable="true" />
 
 
         <com.airbnb.lottie.LottieAnimationView
@@ -160,7 +157,7 @@
             android:visibility="gone"
             app:lottie_autoPlay="true"
             android:layout_gravity="center"
-            app:lottie_colorFilter="@color/black"
+            app:lottie_colorFilter="@color/white"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/load" />
 

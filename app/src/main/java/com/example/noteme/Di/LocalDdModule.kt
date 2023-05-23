@@ -18,7 +18,7 @@ class LocalDdModule {
     @Singleton
     @Provides
     fun roomDbInstance(@ApplicationContext context: Context): roomDatabase {
-     return Room.databaseBuilder(context,roomDatabase::class.java,"notesResponse")
+     return Room.databaseBuilder(context,roomDatabase::class.java,"NotesResponse")
          .fallbackToDestructiveMigration()
          .build()
     }

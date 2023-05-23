@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/black"
     android:layout_height="match_parent"
     android:scrollbars="none">
 
@@ -19,7 +20,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/sf_pro_display_bold"
             android:text="@string/txt_login_header"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_login_subheader"
-            android:textColor="@color/light_gray"
+            android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_marginTop="72dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_email"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
         <EditText
@@ -49,15 +50,16 @@
             android:fontFamily="@font/sf_display_semibold"
             android:hint="@string/txt_email_hint"
             android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
+            android:importantForAutofill="no"
+            android:textColor="#E0E0E0"
+            android:textColorHint="#808080"
             android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +67,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_password"
-            android:textColor="@color/black"
+            android:textColor="#C0C0C0"
             android:textSize="12sp" />
 
         <EditText
@@ -77,15 +79,16 @@
             android:fontFamily="@font/sf_display_semibold"
             android:hint="@string/txt_password_hint"
             android:inputType="textPassword"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
+            android:textColor="#E0E0E0"
+            android:importantForAutofill="no"
+            android:textColorHint="#808080"
             android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <TextView
             android:id="@+id/txt_error"
@@ -94,13 +97,12 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text=""
-            android:textColor="@color/highlight_text_color"
+            android:textColor="#808080"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/btn_login"
             style="@style/Widget.Material3.Button"
-            android:backgroundTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -108,6 +110,7 @@
             android:text="@string/txt_login"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:backgroundTint="#212121"
             android:textSize="16sp" />
 
         <TextView
@@ -116,9 +119,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:textColor="#808080"
             android:fontFamily="@font/sf_display_semibold"
             android:text="@string/txt_no_account_signup"
             android:textSize="14sp" />
+
         <com.airbnb.lottie.LottieAnimationView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/loading_bar_2"
@@ -127,13 +132,12 @@
             android:visibility="gone"
             app:lottie_autoPlay="true"
             android:layout_gravity="center"
-            app:lottie_colorFilter="@color/black"
+            app:lottie_colorFilter="@color/white"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/load" />
 
-
-
     </LinearLayout>
+
 
 
 </ScrollView>

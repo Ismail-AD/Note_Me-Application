@@ -1,11 +1,11 @@
 package com.example.noteme
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noteme.Models.NoteRequest
 import com.example.noteme.repository.NotesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,9 +15,8 @@ class notesViewModel @Inject constructor(private val notesRepository: NotesRepos
 
     val mutableInstance get() = notesRepository.responseStateFlow
     val statusInstance get() = notesRepository.responseStatusStateFLow
+    val offlineLiveDb get() = notesRepository.getRoomData
 
-
-    var data = notesRepository.getNotesOff()
     fun delete_All_Data(){
         viewModelScope.launch {
             notesRepository.delAll()
@@ -31,7 +30,7 @@ class notesViewModel @Inject constructor(private val notesRepository: NotesRepos
     }
 
     fun createNotes(noteRequest: NoteRequest) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             notesRepository.createNotes(noteRequest)
         }
     }

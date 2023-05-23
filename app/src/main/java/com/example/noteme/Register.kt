@@ -1,10 +1,12 @@
 package com.example.noteme
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -56,6 +58,7 @@ class Register : Fragment() {
         binding.btnSignUp.setOnClickListener {
             //we will check boolean value of pair to perform further operations
             val validationRes = validateUserInput()
+            hideMyKeyboard(binding.txtEmail)
             if (validationRes.first) {
                 viewModelClass.registerUser(getUserInfo())
             } else {
@@ -72,6 +75,11 @@ class Register : Fragment() {
         bind_Observer_to_fragment()
 
 
+    }
+
+    private fun hideMyKeyboard(view: View) {
+        val iManger = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        iManger.hideSoftInputFromWindow(view.windowToken,0)
     }
 
     //TO TAKE INPUT

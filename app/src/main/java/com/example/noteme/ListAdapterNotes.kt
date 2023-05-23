@@ -36,8 +36,10 @@ class ListAdapterNotes(private var onNoteClicked_ln: (NotesResponse) -> Unit) :
         fun bind(notesResponse: NotesResponse) {
             noteItemBinding.title.text = notesResponse.title
             noteItemBinding.desc.text = notesResponse.description
- //Locale is used to represent specific country / language date or information
-            val format: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",Locale.getDefault())
+            //Locale is used to represent specific country / language date or information
+            val format: DateFormat =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            format.timeZone = TimeZone.getTimeZone("PKT")
             val date = format.parse(notesResponse.updatedAt)
 
             if (date != null) {

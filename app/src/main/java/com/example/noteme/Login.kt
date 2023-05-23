@@ -1,15 +1,15 @@
 package com.example.noteme
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -50,6 +50,7 @@ class Login : Fragment() {
         binding.btnLogin.setOnClickListener {
             //we will check boolean value of pair to perform further operations
             val validationRes = validateUserInput()
+            hideMyKeyboard(binding.txtEmail)
             if (validationRes.first) {
                 viewModelClass.loginUser(getUserInfo())
             } else {
@@ -60,6 +61,11 @@ class Login : Fragment() {
         //Observer implemented for this fragment(which is lifecycle owner) on Live data instance created in view model
         //if anything updated in live data it will directly trigger observer lambda function
         bind_Observer_to_fragment()
+    }
+
+    private fun hideMyKeyboard(view: View) {
+        val iManger = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        iManger.hideSoftInputFromWindow(view.windowToken,0)
     }
 
     //TO TAKE INPUT

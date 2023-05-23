@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/black"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/add_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/sf_pro_display_bold"
+        android:fontFamily="@font/sf_pro_display_regular"
         android:text="Edit Note"
-        android:textColor="@color/black"
+        android:textColor="#CCCCCC"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,16 +22,16 @@
 
     <ImageView
         android:id="@+id/btndelete"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:layout_marginEnd="@dimen/_34sdp"
         android:visibility="visible"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="@+id/add_edit_text"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black"
+        app:tint="@color/white"
         android:focusable="true" />
 
     <LinearLayout
@@ -52,7 +52,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/note_title"
-            android:textColor="@color/black"
+            android:textColor="#CCCCCC"
             android:textSize="12sp" />
 
         <EditText
@@ -63,15 +63,14 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/sf_display_semibold"
             android:hint="@string/txt_title_hint"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            android:textSize="16sp" />
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,7 +78,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:text="@string/txt_description"
-            android:textColor="@color/black"
+            android:textColor="#CCCCCC"
             android:textSize="12sp" />
 
         <EditText
@@ -95,15 +94,14 @@
             android:lines="10"
             android:scrollHorizontally="false"
             android:scrollbars="vertical"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_gray"
-            android:textSize="16sp" />
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/light_gray" />
+            android:background="@color/white" />
 
         <Button
             android:id="@+id/btnSub"
@@ -112,11 +110,11 @@
             android:layout_height="wrap_content"
             android:visibility="visible"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/black"
-            android:fontFamily="@font/sf_pro_display_bold"
+            android:fontFamily="@font/sf_display_semibold"
             android:text="@string/txt_submit"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:backgroundTint="#212121"
             android:textSize="16sp" />
     </LinearLayout>
 

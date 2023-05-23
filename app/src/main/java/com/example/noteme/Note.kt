@@ -46,20 +46,6 @@ class Note : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setInitialData()
-        if (!internetIsConnected()) {
-            _binding.btnSub.isVisible = false
-            _binding.btndelete.isVisible = false
-            _binding.txtTitle.isFocusable = false
-            _binding.txtTitle.isEnabled = false
-            _binding.txtTitle.isCursorVisible = false
-            _binding.txtTitle.keyListener = null
-            _binding.txtTitle.setBackgroundColor(Color.TRANSPARENT)
-            _binding.txtDescription.isFocusable = false
-            _binding.txtDescription.isEnabled = false
-            _binding.txtDescription.isCursorVisible = false
-            _binding.txtDescription.keyListener = null
-            _binding.txtDescription.setBackgroundColor(Color.TRANSPARENT)
-        }
         HandleClicks()
         bindObserver()
     }
@@ -75,7 +61,9 @@ class Note : Fragment() {
                             findNavController().popBackStack()
                         }
                         is NetworkResult.Failure -> {
-                            Toast.makeText(context, noteVM.statusInstance.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context,
+                                noteVM.statusInstance.toString(),
+                                Toast.LENGTH_SHORT).show()
                         }
                         is NetworkResult.Loading -> {}
                         else -> {}
@@ -90,19 +78,23 @@ class Note : Fragment() {
         _binding.btndelete.setOnClickListener {
             notes?.let {
                 noteVM.deleteNotes(it!!._id)
+                findNavController().popBackStack()
             }
-            Toast.makeText(context, "Deleted Successfully !", Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+            Toast.makeText(context, "Submit a Note first !", Toast.LENGTH_SHORT).show()
         }
 
         _binding.btnSub.setOnClickListener {
             val title = _binding.txtTitle.text.toString()
             val description = _binding.txtDescription.text.toString()
-            val noteRequest = NoteRequest(description, title)
-            if (notes == null) {
-                noteVM.createNotes(noteRequest)
+            if (title.isEmpty() || description.isEmpty()) {
+                Toast.makeText(context, "Fill Both Fields !", Toast.LENGTH_SHORT).show()
             } else {
-                noteVM.updateNotes(notes!!._id, noteRequest)
+                val noteRequest = NoteRequest(description, title)
+                if (notes == null) {
+                    noteVM.createNotes(noteRequest)
+                } else {
+                    noteVM.updateNotes(notes!!._id, noteRequest)
+                }
             }
         }
     }

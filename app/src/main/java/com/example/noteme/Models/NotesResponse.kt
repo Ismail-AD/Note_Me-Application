@@ -3,10 +3,10 @@ package com.example.noteme.Models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "notesResponse")
+@Entity
 data class NotesResponse(
     val __v: Int,
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = false)
     val _id: String,
     val createdAt: String,
     val description: String,

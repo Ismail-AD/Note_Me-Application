@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_display_semibold"
         android:text="How to draw a professional wireframe?"
-        android:textColor="#000"
+        android:textColor="#CCCCCC"
         android:textSize="18sp" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/sf_pro_display_regular"
         android:text="For wireframe, you need to have access to the tools required. You need to check the description of the tool to understand the underpinnings of the tool."
-        android:textColor="#000"
+        android:textColor="#CCCCCC"
         android:textSize="13sp" />
     <TextView
         android:id="@+id/time"
@@ -34,7 +34,7 @@
         android:layout_marginTop="18dp"
         android:fontFamily="@font/sf_pro_display_regular"
         android:text="12:00 pm"
-        android:textColor="#000"
+        android:textColor="#CCCCCC"
         android:textSize="13sp" />
 
 </LinearLayout>

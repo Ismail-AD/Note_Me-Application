@@ -69,17 +69,13 @@ class Register : Fragment() {
             findNavController().navigate(R.id.action_register_to_login)
 
         }
-
-        //Observer implemented for this fragment(which is lifecycle owner) on Live data instance created in view model
-        //if anything updated in live data it will directly trigger observer lambda function
         bind_Observer_to_fragment()
-
 
     }
 
     private fun hideMyKeyboard(view: View) {
         val iManger = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        iManger.hideSoftInputFromWindow(view.windowToken,0)
+        iManger.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     //TO TAKE INPUT
@@ -108,7 +104,7 @@ class Register : Fragment() {
                         is NetworkResult.Success -> {
                             tokenManagement.saveToken(it.data!!.token)
                             //to get token from response
-                            findNavController().navigate(R.id.action_register_to_login)
+                            findNavController().navigate(R.id.action_register_to_main)
                         }
                         is NetworkResult.Failure -> {
                             binding.txtError.text = it.message
@@ -116,7 +112,7 @@ class Register : Fragment() {
                         is NetworkResult.Loading -> {
                             binding.loadingBar.isVisible = true
                         }
-                        else -> {}
+                        is NetworkResult.StateflowInitialization -> {}
                     }
                 }
             }

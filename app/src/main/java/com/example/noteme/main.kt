@@ -66,7 +66,6 @@ class main : Fragment() {
         _binding.noteList.adapter = listAdapterNotes
 
         _binding.logout.setOnClickListener {
-            notesViewModel.delete_All_Data()
             tokenManagement.removeToken()
             Toast.makeText(context, "LOGOUT SUCCESSFULLY !", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()

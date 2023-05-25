@@ -43,6 +43,7 @@ class Login : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.btnSignUp.setOnClickListener {
             findNavController().popBackStack() //to remove the top stack layer that is login to go back to register layer
         }
@@ -57,15 +58,15 @@ class Login : Fragment() {
                 binding.txtError.text = validationRes.second
             }
         }
-
         //Observer implemented for this fragment(which is lifecycle owner) on Live data instance created in view model
         //if anything updated in live data it will directly trigger observer lambda function
         bind_Observer_to_fragment()
+
     }
 
     private fun hideMyKeyboard(view: View) {
         val iManger = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        iManger.hideSoftInputFromWindow(view.windowToken,0)
+        iManger.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     //TO TAKE INPUT

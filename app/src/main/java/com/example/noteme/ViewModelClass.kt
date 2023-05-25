@@ -30,7 +30,7 @@ class ViewModelClass @Inject constructor(private val userRepository: UserReposit
     fun loginUser(userReq: UserReq) {
         //As long as ViewModel Class is active Scope will maintain all background work / functions
         viewModelScope.launch {
-            userRepository.signIp(userReq) //as suspended function so should be launch in a coroutine
+            userRepository.signIn(userReq) //as suspended function so should be launch in a coroutine
         }
     }
 

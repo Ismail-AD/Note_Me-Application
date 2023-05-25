@@ -18,9 +18,9 @@
     <string name="txt_login">Login</string>
     <string name="txt_error_message">%1$S*</string>
     <string name="note_title">Title</string>
-    <string name="txt_title_hint">Write your title</string>
+    <string name="txt_title_hint">Write title for your note </string>
     <string name="txt_description">Description</string>
-    <string name="txt_description_hint">Write your description</string>
+    <string name="txt_description_hint">Write down your thoughts you want to remember</string>
     <string name="txt_submit">Submit</string>
     <string name="add_note">Add Note</string>
     <string name="todo">TODO</string>

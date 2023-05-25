@@ -80,7 +80,6 @@ class Note : Fragment() {
                 noteVM.deleteNotes(it!!._id)
                 findNavController().popBackStack()
             }
-            Toast.makeText(context, "Submit a Note first !", Toast.LENGTH_SHORT).show()
         }
 
         _binding.btnSub.setOnClickListener {
@@ -116,15 +115,6 @@ class Note : Fragment() {
         }
     }
 
-    private fun internetIsConnected(): Boolean {
-        return try {
-            val command = "ping -c 1 google.com"
-            Runtime.getRuntime().exec(command).waitFor() == 0
-
-        } catch (e: Exception) {
-            false
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

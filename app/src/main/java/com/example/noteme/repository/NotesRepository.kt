@@ -40,10 +40,7 @@ class NotesRepository @Inject constructor(
     val getRoomData: LiveData<List<NotesResponse>>
         get() = LiveDataOfRoom
 
-
-
     suspend fun delAll() = dataAccessObject.deleteAllNotes()
-
 
     suspend fun getNotes() {
         if (NetworkStatus.isNetworkAvailable(context)) {
@@ -69,7 +66,6 @@ class NotesRepository @Inject constructor(
         }
 
     }
-
 
     suspend fun createNotes(noteRequest: NoteRequest) {
         if (NetworkStatus.isNetworkAvailable(context)) {

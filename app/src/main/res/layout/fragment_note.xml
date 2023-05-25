@@ -63,6 +63,7 @@
             android:background="@android:color/transparent"
             android:fontFamily="@font/sf_display_semibold"
             android:hint="@string/txt_title_hint"
+            android:textColorHint="#CCCCCC"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -93,6 +94,7 @@
             android:inputType="textMultiLine"
             android:lines="10"
             android:scrollHorizontally="false"
+            android:textColorHint="#CCCCCC"
             android:scrollbars="vertical"
             android:textColor="@color/white"
             android:textSize="15sp" />

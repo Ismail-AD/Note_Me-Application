@@ -28,7 +28,7 @@
             android:id="@+id/action_login_to_main"
             app:destination="@id/main"
             app:popUpTo="@id/register"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/main"

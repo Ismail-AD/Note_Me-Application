@@ -23,9 +23,6 @@ interface dataAccessObject {
     @Update
     suspend fun updateDataOffline(noteRequestOffline: NoteRequestOffline)
 
-    @Query("DELETE FROM NotesResponse WHERE _id =:noteId")
-    suspend fun deleteDataFromOnlineDB(noteId:String)
-
     @Delete
     suspend fun deleteDataOffline(noteRequestOffline: NoteRequestOffline)
 

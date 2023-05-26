@@ -1,6 +1,7 @@
 package com.example.noteme.repository
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import com.example.noteme.Models.NotesResponse
 import com.example.noteme.Utils.NetworkResult
 import com.example.noteme.Utils.NetworkResult.Loading
 import com.example.noteme.Utils.NetworkStatus
+import com.example.noteme.Utils.roomDatabase
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,9 +48,11 @@ class NotesRepository @Inject constructor(
         if (NetworkStatus.isNetworkAvailable(context)) {
             mutableStatus.emit(Loading())
             val response = notesApi.getNotes()
+            val dataForRoom = response.body()!!
             if (response.isSuccessful && response.body() != null) {
+                dataAccessObject.deleteAllNotes()
+                dataAccessObject.insertListData(dataForRoom)
                 mutablestateflow.emit(NetworkResult.Success(response.body()!!))
-                dataAccessObject.insertListData(response.body()!!)
             } else if (response.errorBody() != null) {
 
 //          we get error in form of json so we have to parse json object into java/kotlin object
@@ -74,9 +78,10 @@ class NotesRepository @Inject constructor(
             dataAccessObject.insertData(response.body()!!)
             handleResponse(response, "Notes Successfully Inserted !")
         } else {
-            dataAccessObject.insertDataOffline(NoteRequestOffline(noteRequest.description,
-                noteRequest.title,
-                false))
+            dataAccessObject
+                .insertDataOffline(NoteRequestOffline(noteRequest.description,
+                    noteRequest.title,
+                    false))
             mutableStatus.emit(NetworkResult.Success("Notes Created Offline"))
             Toast.makeText(context, "Displayed After On-Network", Toast.LENGTH_SHORT).show();
         }
@@ -88,10 +93,8 @@ class NotesRepository @Inject constructor(
         if (NetworkStatus.isNetworkAvailable(context)) {
             mutableStatus.emit(Loading())
             val response = notesApi.updateNotes(noteId, noteRequest)
-            dataAccessObject.updateData(response.body()!!)
             handleResponse(response, "Notes Successfully Updated !")
         } else {
-
             Toast.makeText(context, "Requires Internet Connection !", Toast.LENGTH_SHORT).show();
         }
 
@@ -101,7 +104,6 @@ class NotesRepository @Inject constructor(
         if (NetworkStatus.isNetworkAvailable(context)) {
             mutableStatus.emit(Loading())
             val response = notesApi.delNotes(noteId)
-            dataAccessObject.deleteDataFromOnlineDB(noteId)
             handleResponse(response, "Notes Successfully Deleted !")
         } else {
             Toast.makeText(context, "Requires Internet Connection !", Toast.LENGTH_SHORT).show();
@@ -134,7 +136,8 @@ class NotesRepository @Inject constructor(
             handleResponse(response, "Notes Synced Successfully !")
 
             //Now update the pushed notes as synced in offline db as they don't need to be pushed in next event
-            dataAccessObject.updateDataOffline(NoteRequestOffline(it.description, it.title, true))
+            dataAccessObject
+                .updateDataOffline(NoteRequestOffline(it.description, it.title, true))
         }
     }
 }

@@ -67,6 +67,7 @@ class main : Fragment() {
 
         _binding.logout.setOnClickListener {
             tokenManagement.removeToken()
+            notesViewModel.delete_All_Data()
             Toast.makeText(context, "LOGOUT SUCCESSFULLY !", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
         }
@@ -116,8 +117,7 @@ class main : Fragment() {
             notesViewModel.offlineLiveDb.observe(viewLifecycleOwner, Observer {
                 _binding.loadingBar.isVisible = false
                 _binding.Wifi.setImageResource(R.drawable.nowifi)
-                val notes = it.sortedByDescending { it.updatedAt }
-                listAdapterNotes.submitList(notes)
+                listAdapterNotes.submitList(it)
             })
             //Not connected to network
         }
